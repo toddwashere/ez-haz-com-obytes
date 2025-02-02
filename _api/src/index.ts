@@ -16,6 +16,10 @@ app.use(express.json());
 app.use(clerkMiddleware());
 
 // Routes
+app.get('/', (req: Request, res: Response) => {
+  res.write('Hello everyone!');
+  res.end();
+});
 app.use('/api/todos', todoRoutes);
 app.use('/api/webhooks/clerk', webhookRoutes);
 
