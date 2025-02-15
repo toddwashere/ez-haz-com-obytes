@@ -1,9 +1,14 @@
-import { type OrganizationJSON, type UserJSON } from '@clerk/express';
+import {
+  type OrganizationJSON,
+  type OrganizationMembershipJSON,
+  type UserJSON,
+} from '@clerk/express';
 import { type Request, type Response, Router } from 'express';
 import { type IncomingHttpHeaders } from 'http';
 import { Webhook } from 'svix';
 
 import { addOrganization } from '../models/OrganizationRepo';
+import { addOrganizationUser } from '../models/OrganizationUserRepo';
 import { addUser } from '../models/userRepo';
 
 const router = Router();
@@ -121,9 +126,18 @@ const handleWebhookEvent = async (event: WebhookEvent) => {
       break;
     }
 
-    // case 'organizationMembership.created': {
-    //   // Connect a user to an organization
-    // }
+    case 'organizationMembership.created': {
+      const rawData = event.data as OrganizationMembershipJSON;
+
+      rawData.id;
+      await addOrganizationUser(
+        rawData.id,
+        rawData.public_user_data.user_id,
+        rawData.organization.id,
+        rawData.role
+      );
+      break;
+    }
 
     case 'organization.created': {
       console.log('Organization created:', event.data);
