@@ -15,6 +15,26 @@ model User {
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   todos     TodoItem[]
+  orgs      OrganizationUser[]
+}
+
+model Organization {
+  id        String     @id
+  name      String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  users     OrganizationUser[]
+}
+
+model OrganizationUser {
+  id             String @id
+  organizationId String
+  userId         String
+  role           String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  user           User @relation(fields: [userId], references: [id])
 }
 
 model TodoItem {
