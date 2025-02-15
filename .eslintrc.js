@@ -16,13 +16,13 @@ module.exports = {
   },
   rules: {
     'prettier/prettier': 'warn',
-    'unicorn/filename-case': [
-      'error',
-      {
-        case: 'kebabCase',
-        ignore: ['/android', '/ios'],
-      },
-    ],
+    // 'unicorn/filename-case': [
+    //   'error',
+    //   {
+    //     case: 'kebabCase',
+    //     ignore: ['/android', '/ios'],
+    //   },
+    // ],
     // 'max-params': ['error', 3], // Limit the number of parameters in a function to use object instead
     // 'max-lines-per-function': ['error', 70],
     'react/display-name': 'off',
